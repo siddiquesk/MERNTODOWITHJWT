@@ -37,7 +37,7 @@ export const register = async (req, res) => {
     // Check if a user with the given email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "User already registered" });
+      return res.status(400).json({ errors: "User already registered" });
     }
 
     // Hash the password before storing it in the database
