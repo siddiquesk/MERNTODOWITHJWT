@@ -26,9 +26,10 @@ function Login() {
       );
       console.log(data);
       toast.success(data.message || "loggedin successful");
+      localStorage.setItem("jwt", data.token);
+      navigateTo("/");
       setEmail("");
       setPassword("");
-      navigateTo("/"); //home route pe redirection
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.errors || "Failed to login");

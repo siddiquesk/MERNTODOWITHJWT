@@ -4,6 +4,7 @@ export const createTodo=async (req,res)=>{
    const todo=new Todo({
     text:req.body.text,
     completed:req.body.completed,
+    user: req.user._id, //assoiated with logged in user
    })
    try{
   const newtodo=await todo.save();
@@ -16,7 +17,7 @@ export const createTodo=async (req,res)=>{
 
 export const getTodos=async(req,res)=>{
   try{
-  const todos=await Todo.find();
+  const todos=await Todo.find({user: req.user._id});
   res.status(200).json({message:"tods fetched successfully",todos});
   }
   catch(err){

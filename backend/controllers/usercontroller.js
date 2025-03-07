@@ -24,7 +24,7 @@ export const register = async (req, res) => {
 
     // Check if all required fields are provided
     if (!email || !username || !password) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ errors: "All fields are required" });
     }
 
     // Validate input using Zod schema
@@ -70,13 +70,13 @@ export const login = async (req, res) => {
 
     // Check if both email and password are provided
     if (!email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({errors: "All fields are required" });
     }
 
     // Find user by email and include password field for verification
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ errors: "Invalid email or password" });
     }
 
     // Compare entered password with stored hashed password

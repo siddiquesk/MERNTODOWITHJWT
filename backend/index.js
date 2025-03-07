@@ -12,7 +12,6 @@ dotenv.config();
 const PORT=process.env.PORT || 8080;
 const MONGO_DB=process.env.MONGO_URL;
 main().then(()=>{
-console.log('db conncted');
 }).catch(err => console.log(err));
 async function main() {
   await mongoose.connect(MONGO_DB);

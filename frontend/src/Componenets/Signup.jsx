@@ -28,10 +28,11 @@ function Signup() {
       );
       console.log(data);
       toast.success(data.message || "Registration successful");
+      localStorage.setItem("jwt", data.token);
+      navigateTo("/login");
       setEmail("");
       setUsername("");
       setPassword("");
-      navigateTo("/login"); //home route pe redirection
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.errors || "Failed to register");

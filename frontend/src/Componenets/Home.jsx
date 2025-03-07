@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Home() {
   const [todo, setTodo] = useState([]);
@@ -81,14 +83,25 @@ function Home() {
     }
   };
 
+  const navigateTo = useNavigate();
   const logout = async () => {
     try {
-      await axios.post("http://localhost:8080/user/logout");
-      toast.success("Logged Out Successfully");
+      const response = await axios.get("http://localhost:8080/user/logout", {
+        withCredentials: true,
+      });
+
+      if (response.status === 200) {
+        toast.success("Logged Out Successfully");
+        localStorage.clear();
+        setTimeout(() => navigateTo("/login"), 1000);
+      } else {
+        throw new Error("Logout failed");
+      }
     } catch (err) {
-      toast.error("Failed to Logout");
+      toast.error("Failed to Logout: " + err.message);
     }
   };
+
   const remainingTodos = todo.filter((t) => !t.completed).length;
 
   return (
