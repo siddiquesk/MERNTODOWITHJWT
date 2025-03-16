@@ -10,7 +10,7 @@ function Login() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/user/login",
+        "https://sufiyantodoapp.onrender.com/user/login",
         {
           email,
           password,
@@ -26,8 +26,8 @@ function Login() {
       );
       console.log(data);
       toast.success(data.message || "loggedin successful");
-      localStorage.setItem("jwt", data.token);
       navigateTo("/");
+      localStorage.setItem("jwt", data.token);
       setEmail("");
       setPassword("");
     } catch (err) {

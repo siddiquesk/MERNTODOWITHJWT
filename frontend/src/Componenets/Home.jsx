@@ -14,10 +14,13 @@ function Home() {
     const fetchTodos = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:8080/todo/fetch", {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
-        });
+        const response = await axios.get(
+          "https://sufiyantodoapp.onrender.com/todo/fetch",
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
         setTodo(response.data.todos); // सही तरीके से todos सेट करें
         setError(null);
       } catch (err) {
